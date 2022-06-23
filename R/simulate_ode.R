@@ -1,8 +1,8 @@
 odefun <- function(t, y, param) {
-  with(as.list(y, param), {
+  with(param, {
     
     if (istart <= t & t <= iend) {
-      reduction <- npi
+      reduction <- (1-npi)
     } else {
       reduction <- 1
     }
@@ -31,7 +31,7 @@ simulate_ode <- function(R0=1.8,
                          tmax=25,
                          istart=20,
                          iend=20.6,
-                         npi=0.5) {
+                         npi=0.2) {
   tvec <- seq(0, tmax, by=1/300)
   
   sigmamat <- outer(1:n, 1:n, function(x, y) exp(-((x-y)/d)^2))
@@ -39,7 +39,7 @@ simulate_ode <- function(R0=1.8,
   parms <- list(
     R0=R0,
     phi=phi,
-    gamm=gamma, 
+    gamma=gamma, 
     mu=mu,
     m=m,
     n=n,
